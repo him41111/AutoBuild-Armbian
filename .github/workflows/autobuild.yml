@@ -1,5 +1,4 @@
 name: Build Armbian image
-
 on:
   watch:
     types: [started]
@@ -16,11 +15,11 @@ jobs:
         sudo ./compile.sh BOARD=arm-64 BRANCH=current RELEASE=bullseye BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,img
 
     - name: xz compress
-       run: |
-         XZ_OPT='xz -9ekvT0' tar -Jcvf /opt/phicomm-n1/output/images.tar.xz /opt/phicomm-n1/output/images/
+      run: |
+        XZ_OPT='xz -9ekvT0' tar -Jcvf /opt/phicomm-n1/output/images.tar.xz /opt/phicomm-n1/output/images/
 
     - name: Upload image
-       uses: actions/upload-artifact@master
-       with:
-         name: image
-         path: /opt/phicomm-n1/output/*.tar.xz
+      uses: actions/upload-artifact@master
+      with:
+        name: image
+        path: /opt/phicomm-n1/output/*.tar.xz
